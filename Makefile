@@ -15,7 +15,7 @@ run: executable
 
 zip: executable
 	rm -f testcase.zip
-	zip -r testcase.zip .
+	zip testcase.zip executable libshared.so libplugin.so
 
 
 .PHONY: run clean zip
