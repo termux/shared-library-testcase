@@ -15,3 +15,9 @@ This difference in behaviour causes problems for things like perl and node, wher
 > Thanks to its broken linker, I need to link libperl.so with every extension that uses symbols from it.
 
 Is the Android linker (or tools) really broken in this regard, or is the behaviour the expected one?
+
+Reproducing
+===========
+Run `make run` to test this on Linux.
+
+Run `make clean` and `CC=PATH_TO_NDK_STANDALONE_TOOLCHAIN/bin/CC_NAME make zip` to create a `testcase.zip` file. This file can be extracted on an Android device and be run using the contained `./run.sh` script.

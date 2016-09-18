@@ -11,11 +11,11 @@ clean:
 	rm -f executable libshared.so libplugin.so testcase.zip
 
 run: executable
-	LD_LIBRARY_PATH=. ./executable
+	./run.sh
 
 zip: executable
 	rm -f testcase.zip
-	zip testcase.zip executable libshared.so libplugin.so
+	zip testcase.zip executable libshared.so libplugin.so run.sh
 
 
 .PHONY: run clean zip
