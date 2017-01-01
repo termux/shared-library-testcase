@@ -21,3 +21,18 @@ Reproducing
 Run `make run` to test this on Linux.
 
 Run `make clean` and `CC=PATH_TO_NDK_STANDALONE_TOOLCHAIN/bin/CC_NAME make zip` to create a `testcase.zip` file. This file can be extracted on an Android device and be run using the contained `./run.sh` script.
+
+
+Cause
+=====
+See https://github.com/android-ndk/ndk/issues/201:
+
+> tl;dr; This one of the not many differences between linux loader and android loader. On Android only the main executable and LD_PRELOADs are considered to be RTLD_GLOBAL, all the dependencies of the main executable remain RTLD_LOCAL.
+> 
+> Longer explanation:
+> 
+> ld-linux.so marks everything linked against main executable with RTLD_GLOBAL, this is why the example works on Linux. Android loader was not handling RTLD_GLOBAL correctly up until M release. It was fixed in M for things like dlopen/dlsym() but not for the dependencies of the main executable, because it lead to many compatibility problems.
+> 
+> Workaround:
+> 
+> Adding libshared.so dependency to libplugin.so should solve this problem and make the executable.
